@@ -51,8 +51,6 @@ export function UserProvider(props) {
     });
   }, [usertype]);
 
-  console.log(value);
-
   return <UserContext.Provider value={value} {...props} />;
 }
 
