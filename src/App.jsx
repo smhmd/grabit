@@ -2,6 +2,8 @@ import React from 'react';
 import useUser, { UserProvider } from './hooks/useUser';
 
 import LoadingScreen from './components/LoadingScreen';
+import User from './pages/User';
+import Home from './pages/Home';
 
 export default function App() {
   return (
@@ -13,11 +15,5 @@ export default function App() {
 
 function Loader() {
   const { user } = useUser();
-  return user === 'loading' ? (
-    <LoadingScreen />
-  ) : user ? (
-    <div>user</div>
-  ) : (
-    <div>landing page</div>
-  );
+  return user === 'loading' ? <LoadingScreen /> : user ? <User /> : <Home />;
 }
