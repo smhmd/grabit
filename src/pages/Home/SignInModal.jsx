@@ -63,7 +63,10 @@ export default function SignInModal() {
   const isLoggingIn = pathname.startsWith('/login');
 
   return (
-    <Modal title={isLoggingIn ? 'Welcome back! 🎉' : 'Hello there! 👋'}>
+    <Modal
+      path={['/login', '/signup/:type']}
+      title={isLoggingIn ? 'Welcome back! 🎉' : 'Hello there! 👋'}
+    >
       <h3 className="text-sm font-semibold">
         {isLoggingIn ? 'Login as:' : 'Sign up:'}
       </h3>

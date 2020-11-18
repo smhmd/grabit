@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // Reusable Components
 import CustomersSVG from '../../components/svg/CustomersSVG';
@@ -130,9 +130,7 @@ export default function Home() {
       <footer className="w-full max-w-screen-xl px-16 py-4 mx-auto text-center text-black text-opacity-75 md:text-left">
         &copy;{new Date().getFullYear()} Grabit Privacy Policy
       </footer>
-      <Route path={['/login', '/signup/:type']}>
-        <SignInModal />
-      </Route>
+      <SignInModal />
     </div>
   );
 }
