@@ -1,18 +1,22 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import useUser from '../../hooks/useUser';
 
 export default function Login({ type, children }) {
   const { setUsertype } = useUser();
+  const { push } = useHistory();
   return (
     <div
       role="button"
       onClick={() => {
         setUsertype(type);
+        push(`/signup/${type}`);
       }}
       className="flex-col w-full p-8 whitespace-no-wrap border border-white rounded md:flex md:space-y-5"
     >
       {children}
       <div className="flex items-center justify-between">
+        {/* type.slice is used to shave off the "s" in usertypes customers and drivers */}
         <span>Register as a {type.slice(0, -1)}</span>
         <svg
           className="inline w-4 h-4 text-white fill-current md:ml-16"

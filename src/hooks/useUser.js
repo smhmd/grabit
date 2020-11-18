@@ -1,13 +1,26 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { firebase, db } from '../firebase';
+
+export const authenticate = async () => {
+  const provider = new firebase.auth.FacebookAuthProvider(); // login with facebook
+  await firebase.auth().signInWithPopup(provider); // open facebook popup
+};
 
 export const UserContext = createContext('use a provider');
 
 export function UserProvider(props) {
   const [user, setUser] = useState('loading');
   const [usertype, setUsertype] = useState(() => {
-    return window.localStorage.getItem('usertype') || 'drivers';
+    const localStorageUsertype = window.localStorage.getItem('usertype');
+    if (['drivers', 'customers'].includes(localStorageUsertype)) {
+      return localStorageUsertype;
+    } else {
+      return 'drivers';
+    }
   });
+
+  const { push } = useHistory();
 
   const value = useMemo(() => ({ user, setUser, usertype, setUsertype }), [
     user,
@@ -45,16 +58,16 @@ export function UserProvider(props) {
               setUser({ ...data, ref: userReference });
             } // set the state using the data from the server (because changable by the user) since the user is old.
           });
+        push('/');
       } else {
         setUser(null);
       }
     });
-  }, [usertype]);
+  }, [push, usertype]);
 
   return <UserContext.Provider value={value} {...props} />;
 }
 
 export default function useUser() {
-  const { user, setUser, usertype, setUsertype } = useContext(UserContext);
-  return { user, setUser, usertype, setUsertype };
+  return useContext(UserContext);
 }

@@ -1,13 +1,14 @@
 import React from 'react';
+import { Route, Link } from 'react-router-dom';
 
 // Reusable Components
-import Button from '../../components/Button';
 import CustomersSVG from '../../components/svg/CustomersSVG';
 import DriversSVG from '../../components/svg/DriversSVG';
 
 // Components
 import Login from './Login';
 import { FeatureImg, FeatureText } from './Feature';
+import SignInModal from './SignInModal';
 
 // Assets
 import landingBackground from '../../assets/landing.png';
@@ -30,7 +31,10 @@ export default function Home() {
         <header className="flex items-center justify-between w-full max-w-screen-xl px-10 py-8 mx-auto md:px-16">
           <img src={logoWhite} alt="logo" className="w-32" />
           <nav>
-            <Button size="w-full px-6 py-2 md:px-6 md:py-3" onClick={() => {}}>
+            <Link
+              className="flex items-center justify-center w-full px-6 py-2 font-semibold text-white rounded bg-brand-red md:px-6 md:py-3"
+              to="/login"
+            >
               <svg
                 className="hidden mr-3 sm:inline"
                 viewBox="0 0 15 15"
@@ -45,7 +49,7 @@ export default function Home() {
                 ></path>
               </svg>
               Sign in
-            </Button>
+            </Link>
           </nav>
         </header>
         <h1 className="px-3 text-2xl text-center md:text-4xl lg:text-5xl">
@@ -126,6 +130,9 @@ export default function Home() {
       <footer className="w-full max-w-screen-xl px-16 py-4 mx-auto text-center text-black text-opacity-75 md:text-left">
         &copy;{new Date().getFullYear()} Grabit Privacy Policy
       </footer>
+      <Route path={['/login', '/signup/:type']}>
+        <SignInModal />
+      </Route>
     </div>
   );
 }

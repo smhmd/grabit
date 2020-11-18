@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
 import useUser, { UserProvider } from './hooks/useUser';
 
 import LoadingScreen from './components/LoadingScreen';
@@ -7,9 +8,13 @@ import Home from './pages/Home';
 
 export default function App() {
   return (
-    <UserProvider>
-      <Loader />
-    </UserProvider>
+    <BrowserRouter>
+      <UserProvider>
+        <Route path="/">
+          <Loader />
+        </Route>
+      </UserProvider>
+    </BrowserRouter>
   );
 }
 

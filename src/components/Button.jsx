@@ -10,10 +10,8 @@ function Button(props) {
   return (
     <button
       {...props}
-      className={`flex items-center justify-center font-semibold rounded disabled:bg-black disabled:bg-opacity-25 disabled:cursor-not-allowed
-      ${props.colors || 'text-white bg-brand-red'}
-      ${props.size || 'w-full px-6 py-2 md:px-12 md:py-3'}
-      `}
+      className={`flex items-center justify-center font-semibold rounded disabled:bg-black disabled:bg-opacity-25 disabled:cursor-not-allowed w-full px-6 py-2 md:px-12 md:py-3
+      ${props.colors || 'text-white bg-brand-red'}`}
     >
       {props.children}
     </button>
