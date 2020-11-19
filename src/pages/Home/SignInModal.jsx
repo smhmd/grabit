@@ -95,6 +95,7 @@ export default function SignInModal() {
             onClick={(e) => {
               e.preventDefault();
               authenticate();
+              push('/');
             }}
             colors="text-white bg-blue-600 w-full"
           >

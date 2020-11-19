@@ -1,5 +1,4 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { firebase, db } from '../firebase';
 
 export const authenticate = async () => {
@@ -19,8 +18,6 @@ export function UserProvider(props) {
       return 'drivers';
     }
   });
-
-  const { push } = useHistory();
 
   const value = useMemo(() => ({ user, setUser, usertype, setUsertype }), [
     user,
@@ -58,12 +55,11 @@ export function UserProvider(props) {
               setUser({ ...data, ref: userReference });
             } // set the state using the data from the server (because changable by the user) since the user is old.
           });
-        push('/');
       } else {
         setUser(null);
       }
     });
-  }, [push, usertype]);
+  }, [usertype]);
 
   return <UserContext.Provider value={value} {...props} />;
 }

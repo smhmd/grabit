@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import useUser, { UserProvider } from './hooks/useUser';
 
 import LoadingScreen from './components/LoadingScreen';
@@ -10,9 +10,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <UserProvider>
-        <Route path="/">
-          <Loader />
-        </Route>
+        <Loader />
       </UserProvider>
     </BrowserRouter>
   );
