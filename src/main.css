@@ -1,0 +1,35 @@
+.User::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+.User::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+
+.User::-webkit-scrollbar-thumb {
+  --bg-opacity: 1;
+  background-color: #333c45;
+  background-color: rgba(51, 60, 69, var(--bg-opacity));
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+
+.User::-webkit-scrollbar-thumb:hover {
+  --bg-opacity: 1;
+  background-color: #222a30;
+  background-color: rgba(34, 42, 48, var(--bg-opacity));
+}
+
+.User::-webkit-scrollbar-track {
+  --bg-opacity: 1;
+  background-color: #cbd5e0;
+  background-color: rgba(203, 213, 224, var(--bg-opacity));
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+
+.User::-webkit-scrollbar-corner {
+  background: transparent;
+}
