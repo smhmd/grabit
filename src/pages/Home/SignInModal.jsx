@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, useHistory } from 'react-router-dom';
+import { Route, useHistory, useRouteMatch } from 'react-router-dom';
 
 import useUser, { authenticate } from '../../hooks/useUser';
 
@@ -55,20 +55,16 @@ function Radio({ data: { type, SVG } }) {
 }
 
 export default function SignInModal() {
-  const {
-    push,
-    location: { pathname },
-  } = useHistory();
-
-  const isLoggingIn = pathname.startsWith('/login');
+  const { push } = useHistory();
+  const isLogginIn = useRouteMatch('/login');
 
   return (
     <Modal
       path={['/login', '/signup/:type']}
-      title={isLoggingIn ? 'Welcome back! 🎉' : 'Hello there! 👋'}
+      title={isLogginIn ? 'Welcome back! 🎉' : 'Hello there! 👋'}
     >
       <h3 className="text-sm font-semibold">
-        {isLoggingIn ? 'Login as:' : 'Sign up:'}
+        {isLogginIn ? 'Login as:' : 'Sign up:'}
       </h3>
       <form className="space-y-1">
         <Route exact path="/login">
