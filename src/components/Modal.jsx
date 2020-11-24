@@ -5,7 +5,7 @@ import { Route, useHistory } from 'react-router-dom';
 export default function Modal({ path, children, title }) {
   const { push } = useHistory();
   return ReactDOM.createPortal(
-    <Route path={path}>
+    <Route exact path={path}>
       <div // overlay
         onClick={(e) => e.target === e.currentTarget && push('/')}
         aria-hidden="true"
