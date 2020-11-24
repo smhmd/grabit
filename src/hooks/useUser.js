@@ -65,5 +65,9 @@ export function UserProvider(props) {
 }
 
 export default function useUser() {
-  return useContext(UserContext);
+  const context = useContext(UserContext);
+  if (!context) {
+    throw new Error('useUser should be used within a UserProvider');
+  }
+  return context;
 }
