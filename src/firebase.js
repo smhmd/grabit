@@ -21,8 +21,9 @@ const db = firebase.firestore(app);
 
 if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
   process.env.GCLOUD_PROJECT = projectId;
+  process.env.FIRESTORE_EMULATOR_HOST = 'localhost:9090';
+
   db.useEmulator('localhost', 9090);
-  // firebase.auth().useEmulator('http://localhost:9099');
 }
 
 const storage = firebase.storage(app);

@@ -1,40 +1,51 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
 
-import { render, cleanup, screen } from '@testing-library/react';
+import {
+  render,
+  cleanup,
+  screen,
+  fakeUser,
+  initialUser,
+  waitFor,
+} from '../../test-utils';
 import AccountModal from '../User/AccountModal';
+import userEvent from '@testing-library/user-event';
+import { clearFirestoreData } from '@firebase/rules-unit-testing';
 
-jest.mock('../../hooks/useUser', () => {
-  const userObject = {
-    user: {
-      displayName: 'Adam',
-      photoURL: 'photo.png',
-    },
-    setUser: jest.fn(() => {}),
-    usertype: 'drivers',
-  };
+const projectId = 'gemo-grabit';
 
-  return () => userObject;
+afterEach(async () => {
+  cleanup();
+  await clearFirestoreData({ projectId });
 });
 
-afterEach(cleanup);
+let updatedUser = fakeUser();
 
-test("<AccountModal /> shouldn't render on urls other than /account", () => {
-  const { baseElement } = render(
-    <MemoryRouter initialEntries={['/request']}>
-      <AccountModal />
-    </MemoryRouter>,
+test('<AccountModal /> should update user name', async () => {
+  render(<AccountModal />, { path: '/account' });
+
+  const submitButton = screen.getByRole('button', { name: /update/i });
+  const nameInput = screen.getByPlaceholderText(initialUser.displayName);
+
+  userEvent.type(nameInput, updatedUser.displayName);
+  userEvent.click(submitButton);
+
+  waitFor(
+    () => screen.getByPlaceholderText(updatedUser.displayName),
+    // expect(nameInput).toHaveAttribute('placeholder', updatedUser.displayName),
   );
-  expect(baseElement).toMatchSnapshot();
 });
 
-test('<AccountModal /> renders', () => {
-  render(
-    <MemoryRouter initialEntries={['/account']}>
-      <AccountModal />
-    </MemoryRouter>,
-  );
-  // debug();
-  const nameInput = screen.getByLabelText('Update your name');
-  expect(nameInput.placeholder).toBe('Adam');
+updatedUser = {
+  displayName: 'Adam',
+  photoURL: 'photo.png',
+  uid: 'testing-uid',
+};
+
+test('<AccountModal /> should not update user name if no input is given', async () => {
+  render(<AccountModal />, { path: '/account' });
+  const submitButton = screen.getByRole('button', { name: /update/i });
+  const nameInput = screen.getByPlaceholderText(updatedUser.displayName);
+  userEvent.click(submitButton);
+  expect(nameInput).toHaveAttribute('placeholder', updatedUser.displayName);
 });

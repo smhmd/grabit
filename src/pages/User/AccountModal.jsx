@@ -18,9 +18,10 @@ export default function AccountModal() {
     if (file) {
       const fileNameArray = file.name.split('.');
       const fileExtension = fileNameArray[fileNameArray.length - 1];
-      const fileRef = storage
-        .ref()
-        .child(`${user.uid}.${usertype}.${fileExtension}`);
+      const imagePathInStorage = `${
+        process.env.NODE_ENV === 'test' ? 'testing/' : ''
+      }${user.uid}.${usertype}.${fileExtension}`;
+      const fileRef = storage.ref().child(imagePathInStorage);
       await fileRef.put(file);
       const url = await fileRef.getDownloadURL();
       setPhotoURL(url);
@@ -36,13 +37,18 @@ export default function AccountModal() {
 
     if (userName.trim() === '') {
       updatedUser.displayName = user.displayName;
+      if (updatedUser.photoURL === user.photoURL) return;
     }
-    await db
-      .collection(usertype)
-      .doc(user.uid)
-      .set(updatedUser, { merge: true });
-    setUser({ ...user, ...updatedUser });
-    push('/');
+    try {
+      await db
+        .collection(usertype)
+        .doc(user.uid)
+        .set(updatedUser, { merge: true });
+      setUser({ ...user, ...updatedUser });
+    } catch (e) {
+      console.error(e);
+    }
+    // push('/');
   };
 
   return (

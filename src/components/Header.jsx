@@ -28,7 +28,7 @@ function Header() {
             isDropdownOpen={isDropdownOpen}
             setDropdownOpen={setDropdownOpen}
           >
-            <div className="flex items-center space-x-3">
+            <span className="flex items-center space-x-3">
               <span className="text-sm font-semibold text-gray-700">
                 {user.displayName.split(' ')[0]}
               </span>
@@ -45,7 +45,7 @@ function Header() {
                   fill="currentColor"
                 ></path>
               </svg>
-            </div>
+            </span>
             <div>
               <button
                 onClick={() => {

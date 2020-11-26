@@ -1,0 +1,36 @@
+// import {
+//   initializeTestApp,
+//   firestore,
+//   clearFirestoreData,
+//   apps,
+// } from '@firebase/rules-unit-testing';
+
+// const projectId = 'gemo-grabit';
+// process.env.GCLOUD_PROJECT = projectId;
+// process.env.FIRESTORE_EMULATOR_HOST = 'localhost:9090';
+// process.env.FIREBASE_AUTH_EMULATOR_HOST = 'localhost:9099';
+
+// const app = initializeTestApp({ projectId });
+// // const auth = app.auth(app).useEmulator('localhost:9099');
+// const db = firestore(app);
+
+// beforeAll(async () => {
+//   await clearFirestoreData({ projectId });
+// });
+
+// afterAll(() => {
+//   Promise.all(apps().map((app) => app.delete()));
+// });
+
+// // test('Create test doc', async () => {
+// //   await db.collection('test').doc('testDoc').set({ test: 'abcd' });
+// // });
+
+// // test('update test doc', async () => {
+// //   await db
+// //     .collection('test')
+// //     .doc('testDoc')
+// //     .set({ okay: false }, { merge: true });
+// // });
+
+// test('passes', () => {});

@@ -8,7 +8,7 @@ export default function Modal({ path, children, title }) {
     <Route exact path={path}>
       <div // overlay
         onClick={(e) => e.target === e.currentTarget && push('/')}
-        aria-hidden="true"
+        data-testid="overlay"
         className="fixed inset-0 z-20 flex items-center justify-center bg-black bg-opacity-50"
       >
         <div // wrapper
@@ -17,6 +17,7 @@ export default function Modal({ path, children, title }) {
           className="fixed inset-x-0 bottom-0 max-h-screen overflow-hidden bg-white rounded shadow-md cursor-auto sm:static sm:mb-0"
         >
           <h2 // title
+            data-testid="modal-title"
             className="p-8 space-y-3 text-2xl font-bold text-gray-800 capitalize bg-gray-100 border-b sm:px-24 sm:py-4"
           >
             {title}

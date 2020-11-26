@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`<AccountModal /> shouldn't render on urls other than /account 1`] = `
-<body>
-  <div />
-</body>
-`;
